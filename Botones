@@ -1,0 +1,59 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class RadioBoton extends JFrame{
+    public RadioBoton(){
+        super("Interfaz de opciones");
+        setSize(300,500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel actividad = new JLabel("Seleccione la carrera:  ");
+        JLabel materias = new JLabel("Selecciona tus materias: ");
+        JLabel nada = new JLabel();
+        
+        ButtonGroup RadioBoton1 = new ButtonGroup();
+        JPanel pnl = new JPanel(new GridLayout(0,1));
+        
+        JRadioButton obj1 = new JRadioButton("Ing. Sistemas Computacionales", false);
+        JRadioButton obj2 = new JRadioButton("Ing. en Informatica", false);
+        JRadioButton obj3 = new JRadioButton("Ing. Industrial", false);
+        JRadioButton obj4 = new JRadioButton("Ing. Electronica", false);
+        
+        JCheckBox CI = new JCheckBox("Calculo Integral", false); 
+        JCheckBox TAP = new JCheckBox("Topicos Avanzados de Programacion", false);
+        JCheckBox FBD = new JCheckBox("Fundamentos de Base de datos", false);
+        JCheckBox PW = new JCheckBox("Programacion Web", false);
+        JCheckBox DAP = new JCheckBox("Desarrollo de aplicaciones moviles", false);
+                
+        
+        JButton aceptar = new JButton("Aceptar");
+        JButton cancelar = new JButton("Cancelar");
+                
+        RadioBoton1.add(obj1);
+        RadioBoton1.add(obj2);
+        RadioBoton1.add(obj3);
+        RadioBoton1.add(obj4);
+        
+        
+        pnl.add(actividad);
+        pnl.add(obj1);
+        pnl.add(obj2);
+        pnl.add(obj3);
+        pnl.add(obj4);
+        
+        pnl.add(nada);
+        pnl.add(materias);
+        pnl.add(CI);
+        pnl.add(TAP);
+        pnl.add(FBD);
+        pnl.add(PW);
+        pnl.add(DAP);
+        pnl.add(aceptar);
+        pnl.add(cancelar);
+        
+        setContentPane(pnl);
+        setVisible(true);
+    }
+    public static void main(String[]args){
+        SwingUtilities.invokeLater(()-> new RadioBoton());
+    }
+}
