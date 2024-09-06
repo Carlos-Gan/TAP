@@ -1,0 +1,39 @@
+import javax.swing.*;
+import java.awt.*;
+
+
+//Listas
+public class listas extends JFrame{
+    
+    public static void main(String[]args){
+        JFrame frm = new JFrame ("Interfaz con listas");
+        
+        //Tamaño de la ventana
+        frm.setSize(250,200);
+        
+        //Ubicacion de la ventana
+        frm.setLocation(200,200);
+        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //Crear cuadro combinado
+        String[]opciones = {"Sistemas", "TICs", "Informatica", "Industrial"};
+        JComboBox combo = new JComboBox(opciones);
+        
+        //Para que se pueda escribir
+        combo.setEditable(true);
+        
+        String[]opcionesSemestre = {"Semestre 1", "Semestre 2", "Semestre 3", "Semestre 4"};
+        JList lista = new JList(opcionesSemestre);
+        
+        //Agregar contenedor y panel
+        Container contenedor = frm.getContentPane();
+        JPanel pnl = new JPanel();
+        
+        //Agrega combo y componentes
+        
+        pnl.add(combo);
+        contenedor.add(pnl, BorderLayout.NORTH);
+        contenedor.add(new JScrollPane(lista),BorderLayout.CENTER);
+        frm.setVisible(true);
+    }
+}
