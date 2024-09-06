@@ -1,0 +1,84 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Menu1 extends JFrame {
+  public Menu1(){
+      JFrame ventana = new JFrame();
+      ventana.setTitle("Interfaz con menus");
+      ventana.setSize(800,600);
+      setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
+      JPanel pnl = new JPanel();
+      
+      JMenuItem nuevo = new JMenuItem("Nuevo");
+      JMenuItem abrir = new JMenuItem("Abrir");
+      JMenuItem guar = new JMenuItem("Guardar");
+      JMenuItem guarComo = new JMenuItem("Guardar como");
+      JMenuItem imp = new JMenuItem("Imprimir");
+      JMenuItem salir = new JMenuItem("Salir");
+      
+      JMenuItem copiar = new JMenuItem("Copiar");
+      JMenuItem cortar = new JMenuItem("Cortar");
+      JMenuItem pegar = new JMenuItem("Pegar");
+      JMenuItem selTodo = new JMenuItem("Seleccionar todo");
+      
+      JMenuItem bHer = new JMenuItem("Barra de Herramientas");
+      JMenuItem bExp = new JMenuItem("Barra de Explorador");
+      
+      JMenuItem actual = new JMenuItem("Checar Actualzaciones");
+      JMenuItem refer = new JMenuItem("Checar Referencias");
+      JMenuItem inf = new JMenuItem("Mas información");
+      
+      JMenuItem correr = new JMenuItem("Correr el programa");
+      JMenuItem cons = new JMenuItem("Construir el programa");
+      JMenuItem limp = new JMenuItem("Limpiar el programa");
+      
+      JMenu menuArchivo = new JMenu("Archivo");
+      menuArchivo.add(nuevo);
+      menuArchivo.add(abrir);
+      menuArchivo.addSeparator();
+      menuArchivo.add(guar);
+      menuArchivo.add(guarComo);
+      menuArchivo.addSeparator();
+      menuArchivo.add(imp);
+      menuArchivo.addSeparator();
+      menuArchivo.add(salir);
+      
+      JMenu menuEditar = new JMenu("Edición");
+      menuEditar.add(copiar);
+      menuEditar.add(cortar);
+      menuEditar.add(pegar);
+      menuEditar.addSeparator();
+      menuEditar.add(selTodo);
+      
+      JMenu menuVer = new JMenu("Ver");
+      menuVer.add(bHer);
+      menuVer.add(bExp);
+      
+      JMenu menuAyuda = new JMenu("Ayuda");
+      menuAyuda.add(actual);
+      menuAyuda.add(refer);
+      menuAyuda.addSeparator();
+      menuAyuda.add(inf);
+      
+      JMenu menuRun = new JMenu("Correr");
+      menuRun.add(correr);
+      menuRun.add(cons);
+      menuRun.add(limp);
+      
+      JMenuBar menus  = new JMenuBar();
+      menus.add(menuArchivo);
+      menus.add(menuEditar);
+      menus.add(menuVer);
+      menus.add(menuRun);
+      menus.add(menuAyuda);
+      
+      
+      ventana.setJMenuBar(menus);
+      ventana.setVisible(true);
+      
+  }  
+    public static void main(String[]args){
+        Menu1 obj1 = new Menu1();
+    }
+}
