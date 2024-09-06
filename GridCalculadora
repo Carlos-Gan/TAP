@@ -1,0 +1,105 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class GridCalculadora extends JFrame {
+
+    JTextField res = new JTextField(20);
+    JButton btn1 = new JButton("Off");
+    JButton btn2 = new JButton("C");
+    JButton btn3 = new JButton("%");
+    JButton btn4 = new JButton("AC");
+    JButton btn5 = new JButton("+");
+    JButton btn6 = new JButton("MC");
+    JButton btn7 = new JButton("7");
+    JButton btn8 = new JButton("8");
+    JButton btn9 = new JButton("9");
+    JButton btn10 = new JButton("-");
+    JButton btn11 = new JButton("A");
+    JButton btn12 = new JButton("4");
+    JButton btn13 = new JButton("5");
+    JButton btn14 = new JButton("6");
+    JButton btn15 = new JButton("/");
+    JButton btn16 = new JButton("M+");
+    JButton btn17 = new JButton("1");
+    JButton btn18 = new JButton("2");
+    JButton btn19 = new JButton("3");
+    JButton btn20 = new JButton("*");
+    JButton btn21 = new JButton("M-");
+    JButton btn22 = new JButton("e");
+    JButton btn23 = new JButton("0");
+    JButton btn24 = new JButton(".");
+    JButton btn25 = new JButton("=");
+
+    JPanel pnl = new JPanel();
+
+    public GridCalculadora(){
+        
+        pnl.setLayout(new GridBagLayout());
+        GridBagConstraints config = new GridBagConstraints();
+        config.fill = GridBagConstraints.HORIZONTAL;
+        config.insets = new java.awt.Insets(2, 2, 2, 2); // Padding between components
+
+        // Add result field
+        config.gridx = 0;
+        config.gridy = 0;
+        config.gridwidth = 5; // Span across 5 columns
+        config.weightx = 1.0;
+        pnl.add(res, config);
+
+        // Add buttons
+        config.gridwidth = 1;
+        config.weightx = 0.0;
+
+        addButtonToPanel(btn1, 1, 1);
+        addButtonToPanel(btn2, 2, 1);
+        addButtonToPanel(btn3, 3, 1);
+        addButtonToPanel(btn4, 4, 1);
+        addButtonToPanel(btn5, 5, 1);
+
+        addButtonToPanel(btn6, 1, 2);
+        addButtonToPanel(btn7, 2, 2);
+        addButtonToPanel(btn8, 3, 2);
+        addButtonToPanel(btn9, 4, 2);
+        addButtonToPanel(btn10, 5, 2);
+
+        addButtonToPanel(btn11, 1, 3);
+        addButtonToPanel(btn12, 2, 3);
+        addButtonToPanel(btn13, 3, 3);
+        addButtonToPanel(btn14, 4, 3);
+        addButtonToPanel(btn15, 5, 3);
+
+        addButtonToPanel(btn16, 1, 4);
+        addButtonToPanel(btn17, 2, 4);
+        addButtonToPanel(btn18, 3, 4);
+        addButtonToPanel(btn19, 4, 4);
+        addButtonToPanel(btn20, 5, 4);
+
+        addButtonToPanel(btn21, 1, 5);
+        addButtonToPanel(btn22, 2, 5);
+        addButtonToPanel(btn23, 3, 5);
+        addButtonToPanel(btn24, 4, 5);
+        addButtonToPanel(btn25, 5, 5);
+
+        this.add(pnl);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(300, 300);
+        this.setVisible(true);
+    }
+
+    private void addButtonToPanel(JButton button, int x, int y) {
+        GridBagConstraints config = new GridBagConstraints();
+        config.gridx = x;
+        config.gridy = y;
+        config.fill = GridBagConstraints.HORIZONTAL;
+        config.insets = new java.awt.Insets(2, 2, 2, 2); // Padding between buttons
+        pnl.add(button, config);
+    }
+
+    public static void main(String[] args) {
+        new GridCalculadora();
+    }
+}
