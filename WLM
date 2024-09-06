@@ -1,0 +1,86 @@
+import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.swing.*;
+
+public class WLM extends JFrame {
+    public WLM(){
+        JFrame ventana = new JFrame();
+        setSize(350,420);
+        setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
+        
+        JPanel pnl = new JPanel();
+        ButtonGroup grupoBoton = new ButtonGroup();
+        
+        JLabel inSesWLM = new JLabel("Iniciar sesion en Windows Live Message");
+        inSesWLM.setFont(new Font("Arial",Font.PLAIN, 18));
+        JLabel nomUsuario = new JLabel("Escribe aqui tu correo: ");
+        JLabel constra  = new JLabel("Escribe aqui to constraseña: ");
+        
+        JTextField nomUser = new JTextField(12);
+        JPasswordField contra = new JPasswordField(12);
+        
+        JLabel olvContr = new JLabel("¿Has olvidado tu contraseña?");
+        olvContr.setForeground(Color.blue);
+        
+        JLabel noWinLive = new JLabel("¿No tienes Windows Live ID?");
+        JLabel regis = new JLabel("Registrarse");
+        regis.setForeground(Color.blue);
+        
+        JButton aceptar = new JButton("Aceptar");
+        JButton cancelar = new JButton("Cancelar");
+        
+        JCheckBox recC = new JCheckBox("Recordar mi cuenta", false);
+        JCheckBox recCon = new JCheckBox("Recordar mi contraseña", false);
+        JCheckBox inSes = new JCheckBox("Iniciar sesión automaticamente", false);
+        
+        JLabel inSesion = new JLabel("Iniciar sesión como: ");
+        String[]opciones = {"Disponible","Ausente","Ocupado","Aparecer sin conexión"};
+        JComboBox lista = new JComboBox(opciones);
+        
+        
+
+        pnl.add(inSesWLM);
+
+        try {
+            URL urlImagen = new URL("https://th.bing.com/th/id/R.02414c87e8d207c23391d2f4a9c47505?rik=6LB3d1uRmv0eBA&pid=ImgRaw&r=0");
+            ImageIcon imagen = new ImageIcon(urlImagen);
+            Image img = imagen.getImage();
+            Image newimg = img.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH); 
+            ImageIcon scaledImagen = new ImageIcon(newimg);
+            JLabel imagenLabel = new JLabel(scaledImagen); 
+            pnl.add(imagenLabel);
+        } catch (MalformedURLException e) {
+            System.err.println("Error al cargar la imagen: " + e.getMessage());
+        }
+        pnl.add(Box.createRigidArea(new Dimension(100, 20)));
+        pnl.add(nomUsuario);
+        pnl.add(nomUser);
+        pnl.add(constra);
+        pnl.add(contra);
+        pnl.add(olvContr);
+        pnl.add(Box.createRigidArea(new Dimension(40, 20)));
+        
+        pnl.add(inSesion);
+        pnl.add(new JScrollPane(lista));
+        
+        pnl.add(recC);
+        pnl.add(Box.createRigidArea(new Dimension(35, 0)));
+        pnl.add(recCon);
+        pnl.add(inSes);
+        
+        pnl.add(noWinLive);
+        pnl.add(regis);
+        pnl.add(Box.createRigidArea(new Dimension(20, 20)));
+        
+        pnl.add(aceptar);
+        pnl.add(cancelar);
+        
+        setContentPane(pnl);
+        setVisible(true);
+    }
+    
+    public static void main(String[]args){
+        WLM obj1 = new WLM();
+    }
+}
