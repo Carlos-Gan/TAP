@@ -1,0 +1,96 @@
+import javax.swing.*;
+
+public class MiAgenda extends JFrame {
+    private JLabel lbAgenda, lbNombre, lbApellidos, lbTelefono, lbEmail, lbFechaNacimiento, lbCalle, lbFraccionamiento;
+    private JTextField txtNombre, txtApellidos, txtTelefono, txtEmail, txtFechaNacimiento, txtCalle, txtFraccionamiento;
+    private JButton btGuardar, btCancelar;
+
+    public MiAgenda() {
+        super("Mi distribución");
+        metodoVentana();
+        metodoComponentes();
+    }
+
+    public void metodoVentana() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(380, 500);
+        this.setLayout(null);
+    }
+
+    public void metodoComponentes() {
+        lbAgenda = new JLabel("Agenda");
+        lbAgenda.setBounds(160, 10, 100, 25);
+        this.add(lbAgenda);
+
+        lbNombre = new JLabel("Nombre:");
+        lbNombre.setBounds(50, 30, 100, 25);
+        this.add(lbNombre);
+
+        txtNombre = new JTextField();
+        txtNombre.setBounds(50, 60, 250, 25);
+        this.add(txtNombre);
+
+        lbApellidos = new JLabel("Apellidos:");
+        lbApellidos.setBounds(50, 90, 100, 25);
+        this.add(lbApellidos);
+
+        txtApellidos = new JTextField();
+        txtApellidos.setBounds(50, 120, 250, 25);
+        this.add(txtApellidos);
+
+        lbTelefono = new JLabel("Telefono:");
+        lbTelefono.setBounds(50, 150, 200, 25);
+        this.add(lbTelefono);
+
+        txtTelefono = new JTextField();
+        txtTelefono.setBounds(50, 180, 100, 25);
+        this.add(txtTelefono);
+
+        lbEmail = new JLabel("Email:");
+        lbEmail.setBounds(200, 150, 100, 25);
+        this.add(lbEmail);
+
+        txtEmail = new JTextField();
+        txtEmail.setBounds(200, 180, 100, 25);
+        this.add(txtEmail);
+
+        lbFechaNacimiento = new JLabel("Fecha de Nacimiento:");
+        lbFechaNacimiento.setBounds(50, 210, 200, 25);
+        this.add(lbFechaNacimiento);
+
+        txtFechaNacimiento = new JTextField();
+        txtFechaNacimiento.setBounds(50, 240, 100, 25);
+        this.add(txtFechaNacimiento);
+
+        lbCalle = new JLabel("Calle:");
+        lbCalle.setBounds(50, 270,100, 25);
+        this.add(lbCalle);
+
+        txtCalle = new JTextField();
+        txtCalle.setBounds(50, 300, 250, 25);
+        this.add(txtCalle);
+
+        lbFraccionamiento = new JLabel("Fraccionamiento:");
+        lbFraccionamiento.setBounds(50, 330, 100, 25);
+        this.add(lbFraccionamiento);
+
+        txtFraccionamiento = new JTextField();
+        txtFraccionamiento.setBounds(50, 360, 250, 25);
+        this.add(txtFraccionamiento);
+
+        btGuardar = new JButton("Guardar");
+        btGuardar.setBounds(50, 400, 100, 25);
+        this.add(btGuardar);
+
+        btCancelar = new JButton("Cancelar");
+        btCancelar.setBounds(200, 400, 100, 25);
+        this.add(btCancelar);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            MiAgenda obj1 = new MiAgenda();
+            obj1.setVisible(true);
+        });
+    }
+}
