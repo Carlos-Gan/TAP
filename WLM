@@ -4,83 +4,101 @@ import java.net.URL;
 import javax.swing.*;
 
 public class WLM extends JFrame {
-    public WLM(){
-        JFrame ventana = new JFrame();
-        setSize(350,420);
-        setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
-        
-        JPanel pnl = new JPanel();
-        ButtonGroup grupoBoton = new ButtonGroup();
-        
-        JLabel inSesWLM = new JLabel("Iniciar sesion en Windows Live Message");
-        inSesWLM.setFont(new Font("Arial",Font.PLAIN, 18));
-        JLabel nomUsuario = new JLabel("Escribe aqui tu correo: ");
-        JLabel constra  = new JLabel("Escribe aqui to constraseña: ");
-        
-        JTextField nomUser = new JTextField(12);
-        JPasswordField contra = new JPasswordField(12);
-        
-        JLabel olvContr = new JLabel("¿Has olvidado tu contraseña?");
-        olvContr.setForeground(Color.blue);
-        
-        JLabel noWinLive = new JLabel("¿No tienes Windows Live ID?");
-        JLabel regis = new JLabel("Registrarse");
-        regis.setForeground(Color.blue);
-        
-        JButton aceptar = new JButton("Aceptar");
-        JButton cancelar = new JButton("Cancelar");
-        
-        JCheckBox recC = new JCheckBox("Recordar mi cuenta", false);
-        JCheckBox recCon = new JCheckBox("Recordar mi contraseña", false);
-        JCheckBox inSes = new JCheckBox("Iniciar sesión automaticamente", false);
-        
-        JLabel inSesion = new JLabel("Iniciar sesión como: ");
-        String[]opciones = {"Disponible","Ausente","Ocupado","Aparecer sin conexión"};
-        JComboBox lista = new JComboBox(opciones);
-        
-        
+    public WLM() {
+        // Set frame properties
+        setTitle("Windows Live Messenger Login");
+        setSize(400, 420);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);  // Center the frame on the screen
 
+        // Create and set up panel
+        JPanel pnl = new JPanel();
+
+        // Create and add menu items
+        JMenuItem SesionDisp = new JMenuItem("Disponible");
+        JMenuItem SesionAusente = new JMenuItem("Ausente");
+        JMenuItem SesionOcupado = new JMenuItem("Ocupado");
+        JMenuItem SesionSinCon = new JMenuItem("Aparecer sin conexión");
+
+        JMenu menuArchivo = new JMenu("Inicio de sesión");
+        menuArchivo.add(SesionDisp);
+        menuArchivo.add(SesionAusente);
+        menuArchivo.add(SesionOcupado);
+        menuArchivo.add(SesionSinCon);
+
+        JMenuBar menus = new JMenuBar();
+        menus.add(menuArchivo);
+        setJMenuBar(menus);
+
+        // Add components to the panel
+        JLabel inSesWLM = new JLabel("Iniciar sesión en Windows Live Messenger");
+        inSesWLM.setFont(new Font("Arial", Font.PLAIN, 18));
         pnl.add(inSesWLM);
 
         try {
             URL urlImagen = new URL("https://th.bing.com/th/id/R.02414c87e8d207c23391d2f4a9c47505?rik=6LB3d1uRmv0eBA&pid=ImgRaw&r=0");
             ImageIcon imagen = new ImageIcon(urlImagen);
             Image img = imagen.getImage();
-            Image newimg = img.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH); 
+            Image newimg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             ImageIcon scaledImagen = new ImageIcon(newimg);
-            JLabel imagenLabel = new JLabel(scaledImagen); 
+            JLabel imagenLabel = new JLabel(scaledImagen);
             pnl.add(imagenLabel);
         } catch (MalformedURLException e) {
             System.err.println("Error al cargar la imagen: " + e.getMessage());
         }
-        pnl.add(Box.createRigidArea(new Dimension(100, 20)));
+
+        JLabel nada = new JLabel();
+        JLabel nomUsuario = new JLabel("Escribe aquí tu correo: ");
         pnl.add(nomUsuario);
+
+        JTextField nomUser = new JTextField(12);
         pnl.add(nomUser);
+
+
+        JLabel constra = new JLabel("Escribe aquí tu contraseña: ");
         pnl.add(constra);
+
+        JPasswordField contra = new JPasswordField(12);
         pnl.add(contra);
+
+        JLabel olvContr = new JLabel("¿Has olvidado tu contraseña?");
+        olvContr.setForeground(Color.blue);
         pnl.add(olvContr);
-        pnl.add(Box.createRigidArea(new Dimension(40, 20)));
-        
+
+        JLabel inSesion = new JLabel("Iniciar sesión como: ");
         pnl.add(inSesion);
-        pnl.add(new JScrollPane(lista));
-        
+
+        String[] opciones = {"Disponible", "Ausente", "Ocupado", "Aparecer sin conexión"};
+        JComboBox<String> lista = new JComboBox<>(opciones);
+        pnl.add(lista);
+
+        JCheckBox recC = new JCheckBox("Recordar mi cuenta");
+        JCheckBox recCon = new JCheckBox("Recordar mi contraseña");
+        JCheckBox inSes = new JCheckBox("Iniciar sesión automáticamente");
         pnl.add(recC);
-        pnl.add(Box.createRigidArea(new Dimension(35, 0)));
         pnl.add(recCon);
         pnl.add(inSes);
-        
+
+        JLabel noWinLive = new JLabel("¿No tienes Windows Live ID?");
         pnl.add(noWinLive);
+
+        JLabel regis = new JLabel("Registrarse");
+        regis.setForeground(Color.blue);
         pnl.add(regis);
-        pnl.add(Box.createRigidArea(new Dimension(20, 20)));
-        
+
+        JButton aceptar = new JButton("Aceptar");
+        JButton cancelar = new JButton("Cancelar");
         pnl.add(aceptar);
         pnl.add(cancelar);
-        
-        setContentPane(pnl);
-        setVisible(true);
+
+        // Add panel to frame
+        add(pnl);
     }
-    
-    public static void main(String[]args){
-        WLM obj1 = new WLM();
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            WLM obj1 = new WLM();
+            obj1.setVisible(true);
+        });
     }
 }
