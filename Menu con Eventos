@@ -1,0 +1,175 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MenuConEventos extends JFrame implements ActionListener {
+
+    // Menu items as instance variables to be accessible in actionPerformed
+    private JMenuItem nuevo;
+    private JMenuItem abrir;
+    private JMenuItem guar;
+    private JMenuItem guarComo;
+    private JMenuItem imp;
+    private JMenuItem salir;
+
+    public MenuConEventos() {
+        super("Interfaz con menus");
+
+        // Set frame properties
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Create menu items
+        nuevo = new JMenuItem("Nuevo");
+        abrir = new JMenuItem("Abrir");
+        guar = new JMenuItem("Guardar");
+        guarComo = new JMenuItem("Guardar como");
+        imp = new JMenuItem("Imprimir");
+        salir = new JMenuItem("Salir");
+
+        JMenuItem copiar = new JMenuItem("Copiar");
+        JMenuItem cortar = new JMenuItem("Cortar");
+        JMenuItem pegar = new JMenuItem("Pegar");
+        JMenuItem selTodo = new JMenuItem("Seleccionar todo");
+
+        JMenuItem bHer = new JMenuItem("Barra de Herramientas");
+        JMenuItem bExp = new JMenuItem("Barra de Explorador");
+
+        JMenuItem actual = new JMenuItem("Checar Actualizaciones");
+        JMenuItem refer = new JMenuItem("Checar Referencias");
+        JMenuItem inf = new JMenuItem("Mas información");
+
+        JMenuItem correr = new JMenuItem("Correr el programa");
+        JMenuItem cons = new JMenuItem("Construir el programa");
+        JMenuItem limp = new JMenuItem("Limpiar el programa");
+
+        // Create menus and add items
+        JMenu menuArchivo = new JMenu("Archivo");
+        menuArchivo.add(nuevo);
+        menuArchivo.add(abrir);
+        menuArchivo.addSeparator();
+        menuArchivo.add(guar);
+        menuArchivo.add(guarComo);
+        menuArchivo.addSeparator();
+        menuArchivo.add(imp);
+        menuArchivo.addSeparator();
+        menuArchivo.add(salir);
+
+        JMenu menuEditar = new JMenu("Edición");
+        menuEditar.add(copiar);
+        menuEditar.add(cortar);
+        menuEditar.add(pegar);
+        menuEditar.addSeparator();
+        menuEditar.add(selTodo);
+
+        JMenu menuVer = new JMenu("Ver");
+        menuVer.add(bHer);
+        menuVer.add(bExp);
+
+        JMenu menuAyuda = new JMenu("Ayuda");
+        menuAyuda.add(actual);
+        menuAyuda.add(refer);
+        menuAyuda.addSeparator();
+        menuAyuda.add(inf);
+
+        JMenu menuRun = new JMenu("Correr");
+        menuRun.add(correr);
+        menuRun.add(cons);
+        menuRun.add(limp);
+
+        // Create menu bar and add menus
+        JMenuBar menus = new JMenuBar();
+        menus.add(menuArchivo);
+        menus.add(menuEditar);
+        menus.add(menuVer);
+        menus.add(menuRun);
+        menus.add(menuAyuda);
+
+        // Set the menu bar for the frame
+        setJMenuBar(menus);
+        
+        // Add action listeners to menu items
+        nuevo.addActionListener(this);
+        abrir.addActionListener(this);
+        guar.addActionListener(this);
+        guarComo.addActionListener(this);
+        imp.addActionListener(this);
+        salir.addActionListener(this);
+
+        // Set the frame visibility
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        // Create and display the GUI
+        SwingUtilities.invokeLater(MenuConEventos::new);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        Object objeto = ev.getSource();
+
+        if (objeto == nuevo) {
+            JTextArea textArea = new JTextArea();
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            JPanel panel = new JPanel(new BorderLayout());
+            panel.add(scrollPane, BorderLayout.CENTER);
+            setTitle("Nuevo");
+            setContentPane(panel);
+            revalidate();
+            repaint();
+
+        } else if (objeto == abrir) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Abriendo...",
+                "Archivo abierto con exito", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            setTitle("Abrir");
+        } else if (objeto == guar) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Guardando...",
+                
+                "Archivo guardado con exito", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            setTitle("Guardar");
+        } else if (objeto == guarComo) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Guardando...",
+                "Guardar como",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        } else if (objeto == imp) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Imprimiendo...",
+                "Imprimir",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            setTitle("Imprimir");
+        } else if (objeto == salir) {
+            int respuesta = JOptionPane.showConfirmDialog(
+                this,
+                "Posiblemente no se apliquen los cambios, ¿Desea continuar?",
+                "Advertencia",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                System.exit(0); // Exit the application
+            }
+        }
+    }
+}
+
+
+// Agregar eventos y en salir salga cuadro de confirmacion.
