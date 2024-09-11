@@ -1,0 +1,91 @@
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Eventos extends JFrame implements ActionListener {
+
+    private JButton boton1 = new JButton("Boton 1");
+    private JButton boton2 = new JButton("Boton 2");
+    private JButton boton3 = new JButton("Boton 3");
+    private JButton boton4 = new JButton("Boton 4");
+    private JLabel etiqueta = new JLabel("Boton pulsado");
+    private JLabel etiqueta2 = new JLabel("Etiqueta 2");
+
+    public Eventos() {
+        super("Eventos");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        boton1.addActionListener(this);
+        boton2.addActionListener(this);
+        boton3.addActionListener(this);
+        boton4.addActionListener(this);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.add(boton1);
+        panel.add(boton2);
+        panel.add(boton3);
+        panel.add(boton4);
+        panel.add(etiqueta);
+        panel.add(etiqueta2);
+        
+        // Optional: Adjust panel background color if desired
+        // panel.setBackground(Color.LIGHT_GRAY);
+
+        add(panel, BorderLayout.CENTER);
+
+        // Optional: Adjust frame background color if desired
+        // getContentPane().setBackground(Color.LIGHT_GRAY);
+    }
+
+    public static void main(String[] args) {
+        Eventos pantalla = new Eventos();
+        pantalla.setSize(400, 200); // Setting a preferred size
+        pantalla.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        Object objeto = ev.getSource();
+        if (objeto == boton1) {
+            setTitle("Boton 1 pulsado");
+            etiqueta.setText("Boton 1 pulsado");
+        } else if (objeto == boton2) {
+            setTitle("Boton 2 pulsado");
+            etiqueta.setText("Boton 2 pulsado");
+        } else if (objeto == boton3) {
+            setTitle("Boton 3 pulsado");
+            etiqueta.setText("Boton 3 pulsado");
+        } else if (objeto == boton4) {
+            setTitle("Boton 4 pulsado");
+            etiqueta.setText("Boton 4 pulsado");
+            etiqueta2.setFont(new Font("Arial", Font.BOLD, 20));
+            getContentPane().setBackground(Color.RED); // This will change the background of the content pane
+        }
+    }
+}
+
+
+// Un evento es la notificacion que se produce cuando algo sucede.
+// Por ejemplo, cuando se hace clic en un boton, se presiona una tecla, se mueve
+// el raton, etc.
+// Los eventos son generados por los componentes de la interfaz grafica de
+// usuario, como los botones, las cajas de texto, etc.
+// Los eventos son manejados por objetos llamados listeners.
+// Todos los eventos son objetos de clases que implementan la interfaz
+// EventListener.
+// Los listeners son objetos que implementan las interfaces de escucha de
+// eventos.
+// java.event: es la clase padre de los eventos.
+// actionListener: interfaz que tiene el metodo actioPerformed(ActionEvent e)
+// que se ejecuta cuando se produce un evento.
+// ActionEvent: se producira cuando se efectue alguna accion sobre un
+// componente, como por ejemplo el clic de un boton.
+
+// Boton de regreso al frame y que muestre en la segunda etiqueta cambie el
+// color y el tamaño.
