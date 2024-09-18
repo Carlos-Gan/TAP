@@ -1,0 +1,135 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+public class Trabajo extends JFrame implements ActionListener {
+
+    private JTextField txnombre;
+    private JTextField txHoras;
+    private JComboBox<String> posicionCombo;
+    private JLabel lbresultado;
+    private DefaultTableModel tablaModelo;
+
+    public Trabajo() {
+        setTitle("Calculadora de Salario");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+    
+        createGUIComponents();
+        setupLayout();
+    
+        tablaModelo = new DefaultTableModel(new Object[] { "Nombre", "Horas", "Posicion", "Paga Total" }, 0);
+    
+        // Read existing data from CSV file
+        try {
+            FileReader reader = new FileReader("salario.csv");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            int rowCount = 0; // Counter to skip the first row
+            while ((line = bufferedReader.readLine()) != null) {
+                if (rowCount == 0) {
+                    rowCount++; // Skip the first row (header)
+                    continue;
+                }
+                String[] values = line.split(",");
+                tablaModelo.addRow(values);
+            }
+            bufferedReader.close();
+        } catch (IOException ex) {
+            // Handle error reading CSV file
+        }
+    
+        JTable tabla = new JTable(tablaModelo);
+        tabla.getTableHeader().setVisible(true);
+        tabla.setBounds(10, 250, 380, 100);
+        add(tabla);
+    }
+
+    private void createGUIComponents() {
+        txnombre = new JTextField();
+        txHoras = new JTextField();
+        String[] posiciones = { "Gerente", "Supervisor", "Operador" };
+        posicionCombo = new JComboBox<>(posiciones);
+        lbresultado = new JLabel("");
+    }
+
+    private void setupLayout() {
+        JLabel label = new JLabel("Nombre:");
+        label.setBounds(10, 10, 80, 25);
+        add(label);
+
+        txnombre.setBounds(140, 10, 150, 25);
+        add(txnombre);
+
+        JLabel lbHoras = new JLabel("Horas trabajadas:");
+        lbHoras.setBounds(10, 50, 150, 25);
+        add(lbHoras);
+
+        txHoras.setBounds(140, 50, 150, 25);
+        add(txHoras);
+
+        JLabel lbPosicion = new JLabel("Posicion:");
+        lbPosicion.setBounds(10, 90, 80, 25);
+        add(lbPosicion);
+
+        posicionCombo.setBounds(140, 90, 150, 25);
+        add(posicionCombo);
+
+        JButton calculoBtn = new JButton("Calcular");
+        calculoBtn.setBounds(10, 120, 100, 25);
+        calculoBtn.addActionListener(this);
+        add(calculoBtn);
+
+        lbresultado.setBounds(10, 150, 280, 100);
+        add(lbresultado);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        float ReHoras = 20.0f; // Example rate per hour
+        int horasTrabajo = Integer.parseInt(txHoras.getText());
+        String Posicion = (String) posicionCombo.getSelectedItem();
+        float pagaTotal = ReHoras * horasTrabajo;
+        tablaModelo.addRow(new Object[] { txnombre.getText(), horasTrabajo, Posicion, pagaTotal });
+        lbresultado.setText("Paga Total: " + pagaTotal);
+
+        // Save data to CSV file
+        try {
+            FileWriter writer = new FileWriter("salario.csv");
+            writer.append("Nombre,Horas,Posicion,Paga Total\n");
+
+            // Iterate over the table model and add rows to the CSV file
+            for (int i = 0; i < tablaModelo.getRowCount(); i++) {
+                writer.append(tablaModelo.getValueAt(i, 0).toString() + ",");
+                writer.append(tablaModelo.getValueAt(i, 1).toString() + ",");
+                writer.append(tablaModelo.getValueAt(i, 2).toString() + ",");
+                writer.append(tablaModelo.getValueAt(i, 3).toString() + "\n");
+            }
+
+            writer.flush();
+            writer.close();
+
+            JOptionPane.showMessageDialog(this, "Datos guardados en archivo CSV");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar archivo CSV: " + ex.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        Trabajo trabajo = new Trabajo();
+        trabajo.setVisible(true);
+    }
+}
