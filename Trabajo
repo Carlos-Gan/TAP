@@ -1,0 +1,128 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+public class Trabajo extends JFrame implements ActionListener {
+
+    private JTextField txnombre;
+    private JTextField txHoras;
+    private JComboBox<String> posicionCombo;
+    private JLabel lbresultado;
+    private DefaultTableModel tablaModelo;
+
+    public Trabajo() {
+        setTitle("Calculadora de Salario");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+
+        createGUIComponents();
+        setupLayout();
+
+        tablaModelo = new DefaultTableModel(new Object[]{"Nombre", "Horas", "Posicion", "Paga Total"}, 0);
+        tablaModelo.addRow(new Object[]{"Nombre", "Horas", "Posicion", "Paga Total"});
+        //tablaModelo.setColumnName(0, "Nombre");
+        //tablaModelo.setColumnName(1, "Horas");
+        //tablaModelo.setColumnName(2, "Posicion");
+        //tablaModelo.setColumnName(3, "Paga Total");
+
+        JTable tabla = new JTable(tablaModelo);
+        tabla.getTableHeader().setVisible(true);
+        tabla.setBounds(10, 250, 380, 100);
+        add(tabla);
+    }
+
+    private void createGUIComponents() {
+        txnombre = new JTextField();
+        txHoras = new JTextField();
+        String[] posiciones = { "Gerente", "Supervisor", "Operador" };
+        posicionCombo = new JComboBox<>(posiciones);
+        lbresultado = new JLabel("");
+    }
+
+    private void setupLayout() {
+        JLabel label = new JLabel("Nombre:");
+        label.setBounds(10, 10, 80, 25);
+        add(label);
+
+        txnombre.setBounds(140, 10, 150, 25);
+        add(txnombre);
+
+        JLabel lbHoras = new JLabel("Horas trabajadas:");
+        lbHoras.setBounds(10, 50, 150, 25);
+        add(lbHoras);
+
+        txHoras.setBounds(140, 50, 150, 25);
+        add(txHoras);
+
+        JLabel lbPosicion = new JLabel("Posicion:");
+        lbPosicion.setBounds(10, 90, 80, 25);
+        add(lbPosicion);
+
+        posicionCombo.setBounds(140, 90, 150, 25);
+        add(posicionCombo);
+
+        JButton calculoBtn = new JButton("Calcular");
+        calculoBtn.setBounds(10, 120, 100, 25);
+        calculoBtn.addActionListener(this);
+        add(calculoBtn);
+
+        lbresultado.setBounds(10, 150, 280, 100);
+        add(lbresultado);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        float ReHoras = 0;
+        String Posicion = (String) posicionCombo.getSelectedItem();
+        if (txnombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor ingrese el nombre",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (txHoras.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor ingrese las horas trabajadas",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (txHoras.getText().matches(".*[a-zA-Z].*")) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor ingrese solo numeros",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int horasTrabajo = Integer.parseInt(txHoras.getText());
+
+        switch (Posicion) {
+            case "Operador":
+                ReHoras = 50.0f;
+                break;
+            case "Supervisor":
+                ReHoras = 100.0f;
+                break;
+            case "Gerente":
+                ReHoras = 150.0f;
+                break;
+        }
+        float pagaTotal = ReHoras * horasTrabajo;
+
+        tablaModelo.addRow(new Object[] { txnombre.getText(), horasTrabajo, Posicion, pagaTotal });
+    }
+
+    public static void main(String[] args) {
+        Trabajo trabajo = new Trabajo();
+        trabajo.setVisible(true);
+    }
+}
